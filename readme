@@ -1,0 +1,38 @@
+TO RUN THIS PROGRAM YOU NEED THE FOLLOWING:
+=================================
+1. zenity 	2.24.0
+2. dialog  	1.1-20080316
+3. fftw 3.0     should be in your path
+4. ifort
+5. mkl library
+6. VMD 		(only for visualization)
+================================================
+IF YOU GOT THE PRECOMPILED STATIC VERSION
+THEN YOU DON"T NEED TO BOTHER ABOUT ANY THING !!
+JUST RUN THE PROGRAM....
+=================================================
+----IF YOU WISH TO COMPILE THE SOURCE PACKGE----- 
+** you need to edit the make file
+  for mkl library path..
+  do the following ..
+  replace this line ::  
+  LFLAGS = -L /opt/intel/mkl/9.1.023/lib/32/ \
+  in the ./src/makefile , with
+  LFLAGS = -L {YOUR SYSTEM MKL LIB PATH}
+======================================
+Configuring libXc
+=================================================
+cd ./libxc-1.0-alpha/
+make clean
+./configure [you may use additional standard options]
+make
+cd src/
+cp *.mod ../../src/
+====================================================
+FOR FURTHER HELP READ THE MANUAL AND PROJECT REPORT 
+        IN THE DOC FOLDER
+====================================================    
+      HOPE THIS WILL WORK
+====================================
+     PROGRAM BY SANDIP DE
+====================================

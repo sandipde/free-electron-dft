@@ -1,0 +1,10 @@
+2000      !no of up spin e (DON'T CHANGE)
+2000	!no of down spin e (DON'T CHANGE)
+0.1     !degenarcy limit
+0.2     !charge density mixing parameter
+1.0E-3  !energy convergence limit
+100     !max iteratons
+6       !max coefficients to be considered on both side of diag of the hamilton(max =6)
+4      !no of iteration after which backup is to be created
+5.0     !Max energy change allowed in one iteration
+y       !should we construct the initial charge density?(y/n)	!should we construct the initial charge density?(y/n)

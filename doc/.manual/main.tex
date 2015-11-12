@@ -1,0 +1,58 @@
+\documentclass[a4paper,11pt,oneside]{sbook}
+\linespread{1.1}
+%\input{commands}
+%% Development and implementation of real space poisson solver and density functional method for investigation finite sized confined systems
+\input {packages}
+%% \pagestyle{fancyplain}
+\setlength{\headheight}{12 pt}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{\nouppercase{\leftmark}}}
+\fancyhead[LO]{\textit{\nouppercase{\rightmark}}}
+\fancypagestyle{plain}{ %
+\fancyhf{} % remove everything
+\renewcommand{\headrulewidth}{0pt} % remove lines as well
+\renewcommand{\footrulewidth}{0pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.8mm}}
+\begin{document}
+\input{title}
+\chapter*{Understanding The Program}
+ This document deals with the technical details of the 3d-dft program. If you have no idea about , what this program does, read my M.Sc project report .
+ The whole program can be used using graphical interface or manually executing the program file. 
+\section{Structure Of The Program}
+ In the 3d-dft directory you will see several files and directories.
+ \begin{itemize}
+ \item Src : This directory contains the source codes of the programs. Do not change these files unless you know , what you are doing.
+ \item bin : The executable file is kept here after compilation of the source code.
+ \item input: Here the input configuration files are kept.
+ \item info: All output informations while running the program are kept here.
+ \item output: The output charge density , input potentials etc can be found here.
+ \item charge\_density\_for\_vmd : The charge densities are written in the format required by vmd for visualization.
+ \item output\_for\_vmd: wave functions are written in the format required by vmd for visualization.
+ \item backup: Here the backup of the outputs are created after predefined number of iterations and the backup files can be used to resume a unfinished job.
+ \end{itemize} 
+ All other files and directories are required to run the program correctly and are not for your use. 
+ \section{Compiling The Program}
+  For compiling the program you need to change the makefile in the \emph{src} directory by hand.
+  You need to give the exact \emph{MKL Library path}. For example if the makefile contains a line  \newline
+  \emph{LFLAGS = -L /opt/intel/mkl/9.1.023/lib/32/ } \newline
+  where  \emph{ /opt/intel/mkl/9.1.023/lib/32/} is the MKL library path for my system , you need to change the path by your MKL library path.
+  This are very standard practice in program compilations . If you are not familiar with this thing, please contact someone in your lab. You may have to 
+  change additional parameters depending upon your system.You need to have fftw3.2 installed and the Library should be in your path.
+  do  \newline \emph  {cd src \newline make} \newline to compile the program. After successful compilation the executable file \emph{3d\_dft.x} will be placed in the \emph{bin} directory.
+  \subsection{Cleaning after compilation}
+  This is not a necessary step.
+         You can clean by \emph{make clean}. DON'T DELETE ALL THE *.mod FILES BY HAND. THERE ARE SOME ADDITIONAL mod FILES REQUIRED BY THE COMPILATION.
+\section{RUNNING THE PROGRAM}
+ If you have successfully compiled the program, you can start using the program by executing the \emph{3d\_dft.x} file. Several scripts are written to make your work easy.
+ run the \emph{start.sh} for graphical interface. You will need  
+ \begin{itemize}
+ \item zenity 	Version 2.24.0
+\item  dialog  Version	1.1-20080316    
+ \end{itemize} 
+ for running the scripts properly. The graphical menu is self explainatory.
+ For any help contact 1sandipde@gmail.com. 
+\end{document}

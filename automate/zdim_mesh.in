@@ -1,0 +1,4 @@
+x dim                        y dim                     z dim
+10                              10                        300
+delta_x                    delta_y                   delta_z
+0.1                           0.1                          0.1

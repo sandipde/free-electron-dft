@@ -1,0 +1,5 @@
+x dim                        y dim                     z dim
+30                              30                       30
+delta_x                    delta_y                   delta_z
+0.1                          0.1                     0.1
+

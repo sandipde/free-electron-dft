@@ -1,0 +1,13 @@
+1000  	!no of up spin e
+0	!no of down spin e
+0.01	!degenarcy limit
+0.2	!charge density mixing parameter
+1E-3	!energy convergence limit
+40	!max iteratons
+5      !no of iteration after which backup is to be created
+30	!Max energy change allowed in one iteration(%)
+y	!should we construct the initial charge density?(y/n)
+y	!should we stop after creation the 1st density?(y/n)
+n	!start from last scheduled backup?
+n	!Continue from last emergency backup point ?
+0	!last backup iteration after which we will proceed?

@@ -1,0 +1,1 @@
+vmd -m -CHGCAR eigen_vec_spinup1.VASP_CHGCAR -CHGCAR eigen_vec_spindn1.VASP_CHGCAR

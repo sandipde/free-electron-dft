@@ -1,0 +1,6 @@
+1		!no of well
+2		!potential choice (1=harmonic,2=box,3=spherical well,4=gaussian,5=harmonic well)
+40 40 40	!w for harmonic & gaussian , lengths for box
+500		!v0
+15		!radius of well
+12	!separation between two wells 

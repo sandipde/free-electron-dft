@@ -1,0 +1,116 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#SCRIPT BY SANDIP DE 19.02.09
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#!/bin/sh
+inf=1
+while [ "$inf" = 1 ]
+do
+dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --title "AUTOMATIC ELECTRON NUMBER GENERATER" --colors --infobox "\n \Zb\Z1
+   ===================================================================================\n
+    This script will generate different configuration files for electron numbers \n
+        run the program and store the results in different names \n
+ ====================================================================================\n \Z0\n\n
+
+	                which parameter do you want to change ?\n\n
+				\n
+    		=======================================================\n
+    		|	(1)---ONLY UP-SPIN ELECTRON NUMBER                   |\n
+    		|	(2)---ONLY DOWN-SPIN ELECTRON NUMBERS                |\n
+    		|	(3)---BOTH ELECTRON NUMBERS                          |\n 
+    		 =======================================================\n \n
+                        ENTER YOUR CHOICE ::\Zb\Z1\Zu(will not be displayed)\ZU \n\n\n
+                              \Zu TO EXIT TYPE  "q" \n \n \n \n \n " 25 90
+read choice
+day=`date |cut -c 9-10`
+month=`date |cut -c 5-7`
+year=`date |cut -c 25-28`
+case "$choice"
+in
+	1)      dialog  --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --colors --title "IMPORTANT !!!" --msgbox "\n\Zb
+     EDIT THE REQUIRED PARAMETERS \n 
+\Z1\Zu WITHOUT TOUCHING \Z0\ZU UP-SPIN NUMBERS" 10 50
+		vi upspin.in
+		dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --title "UP-SPIN ELECTRON GENERATER" --colors --infobox  "\n\Zb
+                give the \Z1   1) starting up-spin electron number\n
+                             2) final electron number \n
+                             3) increase in step \n\n
+                         \Z0\Zu seperated by <space>" 10 70
+		read startup endup stepup
+		mv ../input/main.in ../input/main.bak
+		for i in `seq $startup  $stepup $endup`
+		do
+		 sed  s/1000/$i/g upspin.in >../input/main.in
+		dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --title "IMPORTANT !!!" --infobox  "input file genarated .....\n 
+							executing the program now >>>>>>>>\n" 10 50
+		 cd ../bin/
+		 nohup ./3d_dft.x>../info/screen.out
+		 cd ..
+		  tar -cvvjf upspin=$i.$day$month$year.tar.bz2 info/ output_for_vmd/ output/ input/
+		cd automate/
+		done
+		mv ../input/main.bak ../input/main.in 
+		dialog --msgbox "AUTOMATED WORK COMPLEATED" 10 30 ;;
+
+	2) 	dialog  --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --colors --title "IMPORTANT !!!" --msgbox "\n\Zb
+     EDIT THE REQUIRED PARAMETERS \n 
+\Z1\Zu WITHOUT TOUCHING \Z0\ZU DOWN-SPIN NUMBERS" 10 50
+		vi dnspin.in
+		dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --title "DOWN-SPIN ELECTRON GENERATER" --colors --infobox  "\n\Zb
+                give the \Z1   1) starting dn-spin electron number\n
+                             2) final electron number \n
+                             3) increase in step \n\n
+                         \Z0\Zu seperated by <space>" 10 70
+		read startdn enddn stepdn
+		mv ../input/main.in ../input/main.bak
+		for i in `seq $startdn  $stepdn $enddn`
+		do
+		 sed  s/2000/$i/g dnspin.in >../input/main.in
+		dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --title "IMPORTANT !!!" --infobox  "input file genarated .....\n 
+							executing the program now >>>>>>>>\n" 10 50
+		 cd ../bin/
+		 nohup ./3d_dft.x>../info/screen.out
+		 cd ..
+		  tar -cvvjf dnspin=$i.$day$month$year.tar.bz2 info/ output_for_vmd/ output/ input/
+		cd automate/
+		done
+		mv ../input/main.bak ../input/main.in
+		dialog --msgbox "AUTOMATED WORK COMPLEATED" 10 30 ;;
+
+	3)	dialog  --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --colors --title "IMPORTANT !!!" --msgbox "\n\Zb
+     EDIT THE REQUIRED PARAMETERS \n 
+\Z1\Zu WITHOUT TOUCHING \Z0\ZU UP & DOWN-SPIN NUMBERS" 10 50
+		vi updnspin.in
+		dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --title "UP-SPIN ELECTRON GENERATER" --colors --infobox  "\n\Zb
+                give the \Z1   1) starting up-spin electron number\n
+                             2) final electron number \n
+                             3) increase in step \n\n
+                         \Z0\Zu seperated by <space>" 10 70
+		read startup endup stepup
+		dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --title "DOWN-SPIN ELECTRON GENERATER" --colors --ifobox  "\n\Zb
+                give the \Z1    1) starting dn-spin electron number\n
+                             2) final electron number \n
+                             3) increase in step \n\n
+                         \Z0\Zu seperated by <space>" 10 70
+		read startdn enddn stepdn
+		mv ../input/main.in ../input/main.bak
+		for i in `seq $startup  $stepup $endup`
+		do
+			sed  s/1000/$i/g updnspin.in >temp_spin.in
+			for j in `seq $startdn  $stepdn $enddn`
+			do
+				sed  s/2000/$j/g temp_spin.in >../input/main.in
+				dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --title "IMPORTANT !!!" --infobox  "input file genarated .....\n 
+							executing the program now >>>>>>>>\n" 10 50
+				cd ../bin/
+		 		nohup ./3d_dft.x>../info/screen.out
+		 		cd ..
+		  		tar -cvvjf spinup=$i.dn=$j.$day$month$year.tar.bz2 info/ output_for_vmd/ output/ input/
+				cd automate/
+			done
+		done
+		rm -f temp_spin.in
+		mv ../input/main.bak ../input/main.in
+		dialog --msgbox "AUTOMATED WORK COMPLEATED" 10 30;;
+	q) 	inf=2;dialog --backtitle "PROGRAM BY SANDIP DE   DATE : 19.02.09 " --colors --timeout 1 --msgbox " \n \Zb\Z1\Zu GOING BACK TO AUTOMATED MENU " 10 40;;
+esac
+done
